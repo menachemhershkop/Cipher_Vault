@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import connectMango from './connectDB/connectMongo.js';
 import { apiRuot } from './ruots/apiRuot.js';
+
 const app= express();
 const PORT = 3000;
 const db =await connectMango({

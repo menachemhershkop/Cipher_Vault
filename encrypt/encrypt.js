@@ -1,6 +1,5 @@
 export default function reversText(msg){
     const revers= msg.split("").reverse().join('');
-    return revers;
+    return revers.toUpperCase();
 };
 
-console.log(reversText("abc"));
