@@ -42,3 +42,22 @@ apiRuot.post('/messages/encrypt', valid, async (req,res)=>{
         collect.updateOne({username:username}, {$inc:{encryptesMessagesCount:1}})
     }
 })
+
+apiRuot.post('/messages/decrypt', valid, async (req,res)=>{
+    const {messageid} = req.body;
+    
+    const {data} = await supabase.from('messages').select('*').eq('id', messageid).single()
+    console.log(data);
+    
+    if(data.cipher_type== 'reverse'){
+    const decrypt = reversText(data.encryptes_text);
+    res.status(200).json({id:messageid, decryptedText:decrypt})
+    }
+    else{
+        res.status(200).json({id:messageid, decryptedText:null, error:"CANNOT_DECRYPT"})
+    }
+    
+})
+
+
+ 
